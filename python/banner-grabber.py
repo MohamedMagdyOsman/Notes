@@ -6,7 +6,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # Read arguments after file name
 def get_args():
-    parser = argparse.ArgumentParser(description="A banner grapping tool made with python3.")
+    parser = argparse.ArgumentParser(description="A banner grabbing tool made with python3.")
 
     parser.add_argument('ip', help="The IP(s) to scan.")
     parser.add_argument('-p', '--ports', required=True, help="The port(s) to scan.")
@@ -18,7 +18,7 @@ def get_args():
     return args
 
 
-# Scan a port with TCP connection & banner grapping (info about the service)
+# Scan a port with TCP connection & banner grabbing (info about the service)
 def scan_port(ip, port, verbose, timeout):
     # start TCP connection
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -32,7 +32,7 @@ def scan_port(ip, port, verbose, timeout):
         s.connect((ip, int(port)))
 
         try:
-            # HTTP  banner grapping
+            # HTTP  banner grabbing
             if int(port) in [80, 8080, 8000]:
                 http_request = (
                     f"GET / HTTP/1.1\r\n"
@@ -53,7 +53,7 @@ def scan_port(ip, port, verbose, timeout):
                         return
 
                 print(f"[*] {ip}: port {port} is OPEN")
-            #  normal services banner grapping
+            #  normal services banner grabbing
             else:
                 banner = s.recv(1024).decode(errors="ignore").strip()
                 print(f"[*] {ip}: port {port} is OPEN | {banner}")
